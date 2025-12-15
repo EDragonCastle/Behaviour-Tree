@@ -14,5 +14,5 @@ public abstract class BaseDecorator : IBehaviour
         this.child = child;
     }
 
-    public abstract Status Execute();
+    public abstract Status Execute(Blackboard blackBoard);
 }

@@ -10,10 +10,15 @@ public abstract class BaseComposite : IBehaviour
 {
     protected List<IBehaviour> children = new List<IBehaviour>();
 
+    public BaseComposite(List<IBehaviour> _children)
+    {
+        this.children = _children ?? new List<IBehaviour>();
+    }
+
     public void AddChlid(IBehaviour behaviour)
     {
         children.Add(behaviour);
     }
 
-    public abstract Status Execute();
+    public abstract Status Execute(Blackboard blackBoard);
 }

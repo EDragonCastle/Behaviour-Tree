@@ -15,5 +15,5 @@ public enum Status
 /// </summary>
 public interface IBehaviour
 {
-    public Status Execute();
+    public Status Execute(Blackboard blackBoard);
 }

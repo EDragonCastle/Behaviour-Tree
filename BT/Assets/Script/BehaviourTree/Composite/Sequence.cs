@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 /// <summary>
 /// [Composite Node]
 /// BT를 순차적으로 실행하는 노드다.
@@ -10,21 +11,24 @@
 /// </summary>
 public class Sequence : BaseComposite
 {
+    public Sequence(List<IBehaviour> children) : base(children) { }
+
     /// <summary>
     /// BaseComposite에 있는 Children을 돌면서 Success인지 확인한다.
     /// Running이나 Failure가 있으면 즉시 해당 값을 return 한다.
     /// 이 함수를 실행하는 것만으로 BT 실행 순서 1번째 조건을 만족하는 것이다.
     /// </summary>
     /// <returns></returns>
-    public override Status Execute()
+    public override Status Execute(Blackboard blackBoard)
     {
         // BT 실행 순서에서 2번째 조건에 대한 내용이다. 
         // 왼쪽부터 오른쪽으로 검사한다.
+
         foreach(var child in children)
         {
             // BT 실행 순서에서 3번째 조건에 대한 내용이다.
             // Status를 확인해서 Success가 되는지 안되는 지 확인한다.
-            Status childStatus = child.Execute();
+            Status childStatus = child.Execute(blackBoard);
 
             switch(childStatus)
             {

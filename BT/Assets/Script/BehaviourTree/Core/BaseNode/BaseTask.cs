@@ -5,5 +5,5 @@
 /// </summary>
 public abstract class BaseTask : IBehaviour
 {
-    public abstract Status Execute();
+    public abstract Status Execute(Blackboard blackBoard);
 }
