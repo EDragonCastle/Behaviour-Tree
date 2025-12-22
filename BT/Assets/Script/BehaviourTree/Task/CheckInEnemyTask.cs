@@ -29,6 +29,7 @@ public class CheckInEnemyTask : BaseTask
         }
         else
         {
+            blackBoard.SetValue("TargetPosition", Vector3.zero);
             return Status.Failure;
         }
     }

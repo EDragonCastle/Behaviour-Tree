@@ -10,16 +10,15 @@ public class RunState : ICharaterState
     public void EnterState(Player state)
     {
         var animator = state.GetAnimator();
+        
+        animator.CrossFade("RUN00_F", state.nextAnimationSpeed);
 
-        animator.SetBool("isWalking", true);
-        animator.SetBool("isRunning", true);
     }
 
     // Exit 상태에서 나갈 때 실행
     public void ExitState(Player state)
     {
-        var animator = state.GetAnimator();
-        animator.SetBool("isRunning", false);
+
     }
 
     // key Input 처리 후 다음 상태로 넘어갈 때
@@ -56,23 +55,27 @@ public class RunState : ICharaterState
     {
         if (vertical != 0.0f || horizontal != 0.0f)
         {
-            Vector3 moveDirection = (state.transform.forward * vertical) + (state.transform.right * horizontal);
+            Transform cameraTransform = Camera.main.transform;
+            Vector3 cameraForward = cameraTransform.forward;
+            Vector3 cameraRight = cameraTransform.right;
 
-            if (moveDirection.magnitude > 1)
-            {
-                moveDirection.Normalize();
-            }
+            cameraForward.y = 0f;
+            cameraRight.y = 0f;
+            cameraForward.Normalize();
+            cameraRight.Normalize();
 
-            Vector3 direction = new Vector3(horizontal, 0, vertical);
+            Vector3 moveDirection = ((cameraForward * vertical) + (cameraRight * horizontal)).normalized;
 
             // 입력이 있을 때만 회전 방향을 계산한다.
-            if (direction.magnitude > 0.1f)
+            if (moveDirection.magnitude > 0.1f)
             {
-                state.PlayerRotate(direction);
+                state.PlayerRotate(moveDirection);
             }
 
-            state.MoveMent(state.transform.forward * direction.magnitude * state.moveSpeed * 2);
+            state.MoveMent(moveDirection * state.moveSpeed * 2);
         }
     }
     #endregion
 }
+
+// horizon, vertical

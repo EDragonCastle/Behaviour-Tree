@@ -22,8 +22,10 @@ public class Player : MonoBehaviour
     // Player Movement Varience;
     public float moveSpeed = 1.0f;
     public float jumpForce = 1.0f;
-    public float slideForce = 1.0f;
-    public float rotationSpeed = 0.1f;
+    public float slideForce = 3.0f;
+    public float rotationSpeed = 0.2f;
+
+    public float nextAnimationSpeed = 0.5f;
 
     // Getter Setter Properties
     public Animator GetAnimator() => animator;
@@ -153,40 +155,3 @@ public class Player : MonoBehaviour
         transform.DORotateQuaternion(targetRotation, rotationSpeed).SetEase(Ease.OutSine);
     }
 }
-
-/* 
-    해당 정보를 사용하려면 조건이 필요하다.
-    Parameter를 가져오는 건데 필요할까? 일단 보류
-    이게 Animator의 이름을 가져오기 위해 사용하는 거긴 하다.
-    근데 또 뭐가 필요한지 어떻게 알까?
-    isJumping이 필요하다고 하면 "isJumping"을 직접 찾아야 한다.
-    그래서 이 밑에 있는 기능은 필요 없는 기능인 것 같지만 활용할 수 있는 방법은 
-    어딘가 저장되어 있는 FSM에서 Animation 정보를 알고 있다면 이 밑에 animatorList를 찾을 수 있게 된다.
-    
-    private Dictionary<string, AnimatorControllerParameterType> animatorList;
-    
-    // Animator에 저장되어 있는 Parameter를 가져온다.
-    var parameters = animator.parameters;
-    foreach(var parameter in parameters)
-    {
-        string name = parameter.name;
-        var type = parameter.type;
-        animatorList = new Dictionary<string, AnimatorControllerParameterType>();
-
-        switch(type)
-        {
-            case AnimatorControllerParameterType.Float:
-                animatorList.Add(name, AnimatorControllerParameterType.Float);
-                break;
-            case AnimatorControllerParameterType.Int:
-                animatorList.Add(name, AnimatorControllerParameterType.Int);
-                break;
-            case AnimatorControllerParameterType.Bool:
-                animatorList.Add(name, AnimatorControllerParameterType.Bool);
-                break;
-            case AnimatorControllerParameterType.Trigger:
-                animatorList.Add(name, AnimatorControllerParameterType.Trigger);
-                break;
-        }
-    }
-*/

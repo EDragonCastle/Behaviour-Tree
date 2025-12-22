@@ -6,9 +6,11 @@ public class IdleState : ICharaterState
     // Enter 초기 설정
     public void EnterState(Player state)
     {
+        // FSM Transition Animation
         var animator = state.GetAnimator();
-        animator.SetBool("isWalking", false);
-        animator.SetBool("isRunning", false);
+
+        animator.CrossFade("WAIT00", state.nextAnimationSpeed);
+
     }
 
     // Exit 상태에서 나갈 때 실행
@@ -37,10 +39,9 @@ public class IdleState : ICharaterState
         }
     }
 
-    // Update에서 매 프레임 실행한다.
     public void ExecuteState(Player state)
     {
-        Debug.Log("Idle 실행 중");
+
     }
 
     public void FixedUpdateState(Player state)

@@ -7,7 +7,8 @@ public class JumpState : ICharaterState
     public void EnterState(Player state)
     {
         var animator = state.GetAnimator();
-        animator.SetBool("isJumping", true);
+        animator.CrossFade("JUMP00", state.nextAnimationSpeed);
+
 
         var clipList = state.GetAnimationClipList();
         state.StartStateCoroutine(state.PoseToIdle(clipList["JUMP00"], this));
@@ -18,8 +19,7 @@ public class JumpState : ICharaterState
     // Exit 상태에서 나갈 때 실행
     public void ExitState(Player state)
     {
-        var animator = state.GetAnimator();
-        animator.SetBool("isJumping", false);
+
     }
 
     // key Input 처리 후 다음 상태로 넘어갈 때

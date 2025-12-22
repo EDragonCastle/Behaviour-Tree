@@ -7,9 +7,9 @@ public class SlideState : ICharaterState
     public void EnterState(Player state)
     {
         var animator = state.GetAnimator();
-        animator.SetBool("isSliding", true);
-        animator.SetBool("isWalking", false);
-        animator.SetBool("isRunning", false);
+
+        animator.CrossFade("SLIDE00", state.nextAnimationSpeed);
+ 
 
         var clipList = state.GetAnimationClipList();
         state.StartStateCoroutine(state.PoseToIdle(clipList["SLIDE00"], this));
@@ -19,8 +19,7 @@ public class SlideState : ICharaterState
     // Exit 상태에서 나갈 때 실행
     public void ExitState(Player state)
     {
-        var animator = state.GetAnimator();
-        animator.SetBool("isSliding", false);
+
     }
 
     // key Input 처리 후 다음 상태로 넘어갈 때

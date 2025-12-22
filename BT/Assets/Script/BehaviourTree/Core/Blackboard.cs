@@ -53,26 +53,3 @@ public class Blackboard
             data.Remove(key);
     }
 }
-
-/*
- 
-if(data.TryGetValue(key, out object value))
-{
-    // is가 value type, as가 ref type인데
-    bool isValueType = typeof(T).IsValueType;
-
-    if(isValueType)
-    {
-        if(value is T typeValue)
-            return typeValue;
-    }
-    else
-    {
-        // Error Code CS0413 T랑 as 연산자랑 사용할 수 없다는 내용이다.
-        // 그래서 이를 해결하려면 명시적 캐스팅을 사용해야 한다. (T)value 사용
-        T targetNode = value as T;
-                
-    }
-}
-
-*/
